@@ -1,8 +1,7 @@
-#PHP排序算法
-
 准备
 ---
 1. 先写一个打印输出的方法，用于调试。
+
     ```php
     <?php
         function p($msg) {
@@ -13,6 +12,7 @@
     ```
 
 2. 一个需要排序的数组。
+
     ```php
     <?php
         $arr = [3, 5, 2, 8, 7, 1, 2, 4];
@@ -72,6 +72,7 @@ I. 冒泡排序(BubbleSort)
 ```
 
 去掉邪恶的注释后的精简版：
+
 ```php
 <?php
     function bubbleSort(&$arr) {
@@ -148,6 +149,7 @@ II. 选择排序(SelectionSort)
 ```
 
 无注释精简版：
+
 ```php
 <?php
     function selectionSort(&$arr) {
@@ -236,6 +238,7 @@ function insertSort(&$arr) {
 ```
 
 去掉注释的版本：
+
 ```php
 <?php
     function insertSort(&$arr) {
@@ -324,6 +327,7 @@ function bucketSort($arr) {
 ```
 
 无注释精简版：
+
 ```php
 <?php
     function bucketSort($arr) {
@@ -371,7 +375,8 @@ V. 快速排序(QuickSort)
 还是排队，高个子在后，小个子在前。我们以第一人作为标志，身高低于他的站在他前面，身高高于或等于他的站在他后面，这样再在身高低于他的所有人中和高于等于他身高的人中，分别找一个标志，再如此比较站队...最后的队伍一定是有序的。
 
 ###分治排序的演示
-```php
+
+```
 3, 5, 2, 8, 7, 1, 2 // 原始数组
 [2, 1, 2], 3, [5, 8, 7] // 以第一个数3作为标志，形成的小于和大于等于它的两个集合
 [[1], 2, [2]], 3, [[], 5, [8, 7]] // 再对集合中的数以它们各自的第一个数做标志形成小于和大于等于的两个集合
@@ -380,6 +385,7 @@ V. 快速排序(QuickSort)
 ```
 
 ```php
+<?php
 function quickSort($arr) {
     $count = count($arr);
     // 当数组元素的数量为0或1时，返回数组
@@ -398,9 +404,11 @@ function quickSort($arr) {
     // 返回小于标志的集合分治结果、标志、大于等于标志的集合分治结果的合并集合
     return array_merge(quickSort($smaller), [$flag], quickSort($larger));
 }
+?>
 ```
 
 形成小于、等于、大于参考数的集合的做法：(重复数多的情况下这种做法应该更好)
+
 ```php
 <?php
     function quickSort($arr) {

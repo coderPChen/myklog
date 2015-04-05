@@ -7,6 +7,7 @@
 <meta name="description" content="上善若水，人淡如菊">
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/hc.css" rel="stylesheet">
+<link href="/css/highlight.css" rel="stylesheet">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -26,7 +27,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <p class="navbar-brand">Jason's Blog</p>
+      <p class="navbar-brand">Jason's Klog</p>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -42,7 +43,7 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
-    <li class="sidebar-brand"><a href="/"><h1 class="brand">Jason's Blog</h1></a><h3>上善若水，人淡如菊</h3></li>
+    <li class="sidebar-brand"><a href="/"><h1 class="brand">Jason's Klog</h1></a><h3>上善若水，人淡如菊</h3></li>
     <hr />
     <li><a href="/list.html">List</a></li>
     <li><a href="/links.html">Links</a></li>
@@ -67,26 +68,22 @@
     </small>
   </p> <hr/>
   <div class="post">
-    <h1>PHP排序算法</h1>
-
-<h2>准备</h2>
+    <h2>准备</h2>
 
 <ol>
-<li><p>先写一个打印输出的方法，用于调试。
-<code>php
-&lt;?php
-    function p($msg) {
-        echo &#39;&lt;pre style=&quot;color:red;&quot;&gt;&#39;;
-        print_r($msg);
-    }
-?&gt;
-</code></p></li>
-<li><p>一个需要排序的数组。
-<code>php
-&lt;?php
-    $arr = [3, 5, 2, 8, 7, 1, 2, 4];
-?&gt;
-</code></p></li>
+<li><p>先写一个打印输出的方法，用于调试。</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="k">function</span> <span class="nf">p</span><span class="p">(</span><span class="nv">$msg</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;&lt;pre style=&quot;color:red;&quot;&gt;&#39;</span><span class="p">;</span>
+        <span class="nb">print_r</span><span class="p">(</span><span class="nv">$msg</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div></li>
+<li><p>一个需要排序的数组。</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="nv">$arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div></li>
 </ol>
 
 <h2>I. 冒泡排序(BubbleSort)</h2>
@@ -138,25 +135,23 @@
     <span class="c1">//              +   判断大数在前时的交换</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<p>去掉邪恶的注释后的精简版：
-<code>php
-&lt;?php
-    function bubbleSort(&amp;$arr) {
-        $temp;
-        $count = count($arr);
-        for ( $i = 0; $i &lt; $count - 1; ++$i ) {
-            for ( $j = 0; $j &lt; $count - 1 - $i; ++$j ) {
-                if ( $arr[$j] &gt; $arr[$j + 1] ) {
-                    $temp = $arr[$j];
-                    $arr[$j] = $arr[$j + 1];
-                    $arr[$j + 1] = $temp;
-                }
-            }
-        }
-    }
-?&gt;
-</code></p>
-
+<p>去掉邪恶的注释后的精简版：</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="k">function</span> <span class="nf">bubbleSort</span><span class="p">(</span><span class="o">&amp;</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$temp</span><span class="p">;</span>
+        <span class="nv">$count</span> <span class="o">=</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="nv">$i</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span> <span class="nv">$j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&lt;</span> <span class="nv">$count</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="nv">$i</span><span class="p">;</span> <span class="o">++</span><span class="nv">$j</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+                    <span class="nv">$temp</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span><span class="p">];</span>
+                    <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+                    <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$temp</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
 <h2>II. 选择排序(SelectionSort)</h2>
 
 <h3>What?</h3>
@@ -211,31 +206,29 @@
     <span class="c1">//              +   最大数与末尾数不一致时交换两数</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<p>无注释精简版：
-<code>php
-&lt;?php
-    function selectionSort(&amp;$arr) {
-        $temp;
-        $index;
-        $count = count($arr);
-        for ( $i = 0; $i &lt; $count - 1; ++$i ) {
-            $temp = arr[0];
-            $index = 0;
-            for ( $j = 1; $j &lt; $count - $i; ++$j ) {
-                if ( $temp &lt; $arr[$j] ) {
-                    $temp = $arr[$j];
-                    $index = $j;
-                }
-            }
-            if ( $temp != $arr[$j-1] ) {
-                $arr[$index] = $arr[$j-1];
-                $arr[$j-1] = $temp;
-            }
-        }
-    }
-?&gt;
-</code></p>
-
+<p>无注释精简版：</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="k">function</span> <span class="nf">selectionSort</span><span class="p">(</span><span class="o">&amp;</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$temp</span><span class="p">;</span>
+        <span class="nv">$index</span><span class="p">;</span>
+        <span class="nv">$count</span> <span class="o">=</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="nv">$i</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$temp</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="nv">$index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span> <span class="nv">$j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&lt;</span> <span class="nv">$count</span> <span class="o">-</span> <span class="nv">$i</span><span class="p">;</span> <span class="o">++</span><span class="nv">$j</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span> <span class="nv">$temp</span> <span class="o">&lt;</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+                    <span class="nv">$temp</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span><span class="p">];</span>
+                    <span class="nv">$index</span> <span class="o">=</span> <span class="nv">$j</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="nv">$temp</span> <span class="o">!=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$arr</span><span class="p">[</span><span class="nv">$index</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+                <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$temp</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
 <h2>III. 插入排序(InsertSort)</h2>
 
 <h3>What?</h3>
@@ -296,33 +289,31 @@
 <span class="p">}</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<p>去掉注释的版本：
-<code>php
-&lt;?php
-    function insertSort(&amp;$arr) {
-        $temp;
-        $index;
-        $count = count($arr);
-        for ( $i = 1; $i &lt; $count; ++$i ) {
-            $index = 0;
-            if ( $arr[$i] &lt; $arr[$i - 1] ) {
-                $temp = $arr[$i];
-                for ( $j = $i - 2; $j &gt;= 0; --$j ) {
-                    if ( $arr[$j] &lt; $temp ) {
-                        $index = $j + 1;
-                        break;
-                    }
-                }
-                for ( $k = $i - 1; $k &gt;= $index; --$k ) {
-                    $arr[$k + 1] = $arr[$k];
-                }
-                $arr[$index] = $temp;
-            }
-        }
-    }
-?&gt;
-</code></p>
-
+<p>去掉注释的版本：</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="k">function</span> <span class="nf">insertSort</span><span class="p">(</span><span class="o">&amp;</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$temp</span><span class="p">;</span>
+        <span class="nv">$index</span><span class="p">;</span>
+        <span class="nv">$count</span> <span class="o">=</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$count</span><span class="p">;</span> <span class="o">++</span><span class="nv">$i</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$temp</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
+                <span class="k">for</span> <span class="p">(</span> <span class="nv">$j</span> <span class="o">=</span> <span class="nv">$i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="nv">$j</span> <span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nv">$temp</span> <span class="p">)</span> <span class="p">{</span>
+                        <span class="nv">$index</span> <span class="o">=</span> <span class="nv">$j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                        <span class="k">break</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="k">for</span> <span class="p">(</span> <span class="nv">$k</span> <span class="o">=</span> <span class="nv">$i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$k</span> <span class="o">&gt;=</span> <span class="nv">$index</span><span class="p">;</span> <span class="o">--</span><span class="nv">$k</span> <span class="p">)</span> <span class="p">{</span>
+                    <span class="nv">$arr</span><span class="p">[</span><span class="nv">$k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$k</span><span class="p">];</span>
+                <span class="p">}</span>
+                <span class="nv">$arr</span><span class="p">[</span><span class="nv">$index</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$temp</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
 <h2>IV. 桶排序(BucketSort)</h2>
 
 <p>假设我们有很多硬币，这些硬币中有1分、2分、5分、1角、5角和1元的，每种硬币的数量都很大，这时候需要排序这些硬币你会怎么做？</p>
@@ -381,34 +372,32 @@
 <span class="p">}</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<p>无注释精简版：
-<code>php
-&lt;?php
-    function bucketSort($arr) {
-        $count = count($arr);
-        $max = $min = $arr[0];
-        for ( $i = 1; $i &lt; $count; ++$i ) {
-            if ( $arr[$i] &gt; $max ) {
-                $max = $arr[$i];
-            } else if ( $arr[i] &lt; $min ) {
-                $min = $arr[$i];
-            }
-        }
-        $bucket = array_fill($min, $max - $min + 1, 0);
-        for ( $i = 0; $i &lt; $count; ++$i ) {
-            ++ $bucket[$arr[$i]];
-        }
-        $result;
-        for ( $i = $min; $i &lt;= $max; ++$i ) {
-            for ( $j = 0; $j &lt; $arr[$i]; ++$j ) {
-                $result[] = $i;
-            }
-        }
-        return $result;
-    }
-?&gt;
-</code></p>
-
+<p>无注释精简版：</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="k">function</span> <span class="nf">bucketSort</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$count</span> <span class="o">=</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span>
+        <span class="nv">$max</span> <span class="o">=</span> <span class="nv">$min</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$count</span><span class="p">;</span> <span class="o">++</span><span class="nv">$i</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nv">$max</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$max</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="nv">$arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nv">$min</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$min</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="nv">$bucket</span> <span class="o">=</span> <span class="nb">array_fill</span><span class="p">(</span><span class="nv">$min</span><span class="p">,</span> <span class="nv">$max</span> <span class="o">-</span> <span class="nv">$min</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$count</span><span class="p">;</span> <span class="o">++</span><span class="nv">$i</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="o">++</span> <span class="nv">$bucket</span><span class="p">[</span><span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">]];</span>
+        <span class="p">}</span>
+        <span class="nv">$result</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="nv">$i</span> <span class="o">=</span> <span class="nv">$min</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="nv">$max</span><span class="p">;</span> <span class="o">++</span><span class="nv">$i</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span> <span class="nv">$j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&lt;</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span> <span class="o">++</span><span class="nv">$j</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$result</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$i</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
 <h2>V. 快速排序(QuickSort)</h2>
 
 <h3>基本思想</h3>
@@ -434,54 +423,54 @@
 <p>还是排队，高个子在后，小个子在前。我们以第一人作为标志，身高低于他的站在他前面，身高高于或等于他的站在他后面，这样再在身高低于他的所有人中和高于等于他身高的人中，分别找一个标志，再如此比较站队...最后的队伍一定是有序的。</p>
 
 <h3>分治排序的演示</h3>
-<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">3, 5, 2, 8, 7, 1, 2 // 原始数组</span>
-<span class="x">[2, 1, 2], 3, [5, 8, 7] // 以第一个数3作为标志，形成的小于和大于等于它的两个集合</span>
-<span class="x">[[1], 2, [2]], 3, [[], 5, [8, 7]] // 再对集合中的数以它们各自的第一个数做标志形成小于和大于等于的两个集合</span>
-<span class="x">[[1], 2, [2]], 3, [[], 5, [[7], 8, []]]] // 只有[8, 7]这个集合还需要分治，其它集合只有1个或没有元素</span>
-<span class="x">1, 2, 2, 3, 5, 7, 8 // 此时返回分治的结果，就是已经排序好的数组了</span>
-</code></pre></div><div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">function quickSort($arr) {</span>
-<span class="x">    $count = count($arr);</span>
-<span class="x">    // 当数组元素的数量为0或1时，返回数组</span>
-<span class="x">    if ( $count == 0 || $count == 1 ) {</span>
-<span class="x">        return $arr;</span>
-<span class="x">    }</span>
-<span class="x">    $flag = $arr[0];</span>
-<span class="x">    $smaller = $larger = []; // 两个集合</span>
-<span class="x">    for ( $i = 1; $i &lt; $count; ++$i ) {</span>
-<span class="x">        if ( $arr[$i] &lt; $flag ) {</span>
-<span class="x">            $smaller[] = $arr[$i];</span>
-<span class="x">        } else {</span>
-<span class="x">            $larger[] = $arr[$i];</span>
-<span class="x">        }</span>
-<span class="x">    }</span>
-<span class="x">    // 返回小于标志的集合分治结果、标志、大于等于标志的集合分治结果的合并集合</span>
-<span class="x">    return array_merge(quickSort($smaller), [$flag], quickSort($larger));</span>
-<span class="x">}</span>
+<div class="highlight"><pre><code class="language-text" data-lang="text">3, 5, 2, 8, 7, 1, 2 // 原始数组
+[2, 1, 2], 3, [5, 8, 7] // 以第一个数3作为标志，形成的小于和大于等于它的两个集合
+[[1], 2, [2]], 3, [[], 5, [8, 7]] // 再对集合中的数以它们各自的第一个数做标志形成小于和大于等于的两个集合
+[[1], 2, [2]], 3, [[], 5, [[7], 8, []]]] // 只有[8, 7]这个集合还需要分治，其它集合只有1个或没有元素
+1, 2, 2, 3, 5, 7, 8 // 此时返回分治的结果，就是已经排序好的数组了
+</code></pre></div><div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">quickSort</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$count</span> <span class="o">=</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span>
+    <span class="c1">// 当数组元素的数量为0或1时，返回数组</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nv">$count</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="nv">$count</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$arr</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nv">$flag</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nv">$smaller</span> <span class="o">=</span> <span class="nv">$larger</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">// 两个集合</span>
+    <span class="k">for</span> <span class="p">(</span> <span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$count</span><span class="p">;</span> <span class="o">++</span><span class="nv">$i</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nv">$flag</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$smaller</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$larger</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// 返回小于标志的集合分治结果、标志、大于等于标志的集合分治结果的合并集合</span>
+    <span class="k">return</span> <span class="nb">array_merge</span><span class="p">(</span><span class="nx">quickSort</span><span class="p">(</span><span class="nv">$smaller</span><span class="p">),</span> <span class="p">[</span><span class="nv">$flag</span><span class="p">],</span> <span class="nx">quickSort</span><span class="p">(</span><span class="nv">$larger</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<p>形成小于、等于、大于参考数的集合的做法：(重复数多的情况下这种做法应该更好)
-<code>php
-&lt;?php
-    function quickSort($arr) {
-        $count = count($arr);
-        if ( $count == 0 || $count == 1 ) {
-            return $arr;
-        }
-        $flag = $arr[0];
-        $smaller = $larger = $equal = []; // 3个集合
-        for ( $i = 1; $i &lt; $count; ++$i ) {
-            if ( $arr[$i] &lt; $flag ) {
-                $smaller[] = $arr[$i];
-            } else if ( $arr[$i] == $flag ) {
-                $equal[] = $arr[$i];
-            } else {
-                $larger[] = $arr[$i];
-            }
-        }
-        return array_merge(quickSort($smaller), [$flag], $equal, quickSort($larger));
-    }
-?&gt;
-</code></p>
-
+<p>形成小于、等于、大于参考数的集合的做法：(重复数多的情况下这种做法应该更好)</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="k">function</span> <span class="nf">quickSort</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$count</span> <span class="o">=</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nv">$count</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="nv">$count</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$arr</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$flag</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="nv">$smaller</span> <span class="o">=</span> <span class="nv">$larger</span> <span class="o">=</span> <span class="nv">$equal</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">// 3个集合</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$count</span><span class="p">;</span> <span class="o">++</span><span class="nv">$i</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nv">$flag</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$smaller</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">==</span> <span class="nv">$flag</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$equal</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nv">$larger</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nb">array_merge</span><span class="p">(</span><span class="nx">quickSort</span><span class="p">(</span><span class="nv">$smaller</span><span class="p">),</span> <span class="p">[</span><span class="nv">$flag</span><span class="p">],</span> <span class="nv">$equal</span><span class="p">,</span> <span class="nx">quickSort</span><span class="p">(</span><span class="nv">$larger</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
   </div>
 </div>
 <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
@@ -522,9 +511,9 @@
       <div class="container">
   <footer>
     <p class="text-muted credit">
-      &copy; 2015 Jason's Blog &middot;
+      &copy; 2015 Jason's Klog &middot;
       <a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>
-      2015-04-06 01:03:04 +0800
+      2015-04-06 03:39:04 +0800
     </p>
   </footer>
 </div>
