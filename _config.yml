@@ -15,7 +15,7 @@ timezone: Asia/Shanghai
 highlighter: pygments
 markdown: redcarpet
 redcarpet:
-  extensions: ["tables"]
+extensions: ["tables"]
 
 defaults:
   - scope:

@@ -72,11 +72,12 @@
 
 <ol>
 <li><a href="#delimiters">界定符(Delimiters)</a></li>
-<li>原子</li>
+<li><a href="#atom">原子(Atom)</a></li>
 <li><a href="#meta-characters">元字符(Meta-characters)</a></li>
 <li><a href="#character_classes">字符类(Character classes)</a></li>
-<li>量词</li>
+<li><a href="#repetition">量词/重复(Repetition)</a></li>
 <li>边界控制</li>
+<li><a href="#subpatterns">子组/子表达式(Subpatterns)</a></li>
 <li>模式单元</li>
 </ol>
 
@@ -132,7 +133,7 @@
     <span class="nb">preg_match_all</span><span class="p">(</span><span class="nv">$pattern</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$matches</span><span class="p">)</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<h2>原子</h2>
+<h2 id="atom">原子(Atom)</h2>
 
 <h3>可见原子</h3>
 
@@ -161,6 +162,81 @@
 <p><strong>站长之家</strong>有可用的汉字转Unicode编码工具，可以直接将汉字转为Unicode</p>
 
 <p>一些需要转移的符号：\，$，!，(，+，*，.，^等等，使用时需要加一个&#39;\&#39;来转义</p>
+
+<h3>原子的集合</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: center">元字符</th>
+<th style="text-align: left">描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">.</td>
+<td style="text-align: left">匹配除换行符之外的任意字符</td>
+</tr>
+<tr>
+<td style="text-align: center">\d</td>
+<td style="text-align: left">匹配任意一个十进制数字，即[0-9]</td>
+</tr>
+<tr>
+<td style="text-align: center">\D</td>
+<td style="text-align: left">匹配任意一个非十进制数字，即[^0-9]</td>
+</tr>
+<tr>
+<td style="text-align: center">\s</td>
+<td style="text-align: left">匹配一个不可见原子，即[\f\n\r\t\v]</td>
+</tr>
+<tr>
+<td style="text-align: center">\S</td>
+<td style="text-align: left">匹配一个可见原子，即[^\f\n\r\t\v]</td>
+</tr>
+<tr>
+<td style="text-align: center">\w</td>
+<td style="text-align: left">匹配任意一个数字、字母或下划线，即[0-9a-zA-Z_]</td>
+</tr>
+<tr>
+<td style="text-align: center">\W</td>
+<td style="text-align: left">匹配任意一个非数字、字母或下划线，即[^0-9a-zA-Z_]</td>
+</tr>
+<tr>
+<td style="text-align: center">\b</td>
+<td style="text-align: left">匹配单词的开始或结束</td>
+</tr>
+</tbody></table>
+
+<h3>原子的筛选方式</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: center">筛选方式</th>
+<th style="text-align: left">描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">丨</td>
+<td style="text-align: left">匹配两个或者多个分支选择</td>
+</tr>
+<tr>
+<td style="text-align: center">[]</td>
+<td style="text-align: left">匹配方括号中的任意一个原子</td>
+</tr>
+<tr>
+<td style="text-align: center">[^]</td>
+<td style="text-align: left">匹配除方括号中的原子之外的任意字符</td>
+</tr>
+</tbody></table>
+
+<h3>示例练习</h3>
+
+<ul>
+<li><p>匹配&#39;Duang~&#39;和&#39;duang~&#39;</p>
+
+<p><code>/Duang~|duang~/</code> 或者 <code>/[Dd]uange~/</code></p></li>
+<li><p>匹配用尖括号括起来的以&#39;a&#39;开头的字符串，如&#39;<ab>&#39;,&#39;<a34>&#39;</p>
+
+<p><code>/&lt;a[^&gt;]+&gt;/</code> &#39;[^&gt;]&#39;为非&#39;&gt;&#39;的字符</p></li>
+</ul>
 
 <h2 id="meta-characters">元字符(Meta-characters)</h2>
 
@@ -367,82 +443,9 @@
     <span class="nx">p</span><span class="p">(</span><span class="nv">$matches</span><span class="p">);</span> <span class="c1">// [[&#39;3&#39;, &#39;4&#39;, &#39;3&#39;]]</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<h3>原子的集合</h3>
+<h2 id="repetition">量词/重复(Repetition)</h2>
 
-<table><thead>
-<tr>
-<th style="text-align: center">元字符</th>
-<th style="text-align: left">描述</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: center">.</td>
-<td style="text-align: left">匹配除换行符之外的任意字符</td>
-</tr>
-<tr>
-<td style="text-align: center">\d</td>
-<td style="text-align: left">匹配任意一个十进制数字，即[0-9]</td>
-</tr>
-<tr>
-<td style="text-align: center">\D</td>
-<td style="text-align: left">匹配任意一个非十进制数字，即[^0-9]</td>
-</tr>
-<tr>
-<td style="text-align: center">\s</td>
-<td style="text-align: left">匹配一个不可见原子，即[\f\n\r\t\v]</td>
-</tr>
-<tr>
-<td style="text-align: center">\S</td>
-<td style="text-align: left">匹配一个可见原子，即[^\f\n\r\t\v]</td>
-</tr>
-<tr>
-<td style="text-align: center">\w</td>
-<td style="text-align: left">匹配任意一个数字、字母或下划线，即[0-9a-zA-Z_]</td>
-</tr>
-<tr>
-<td style="text-align: center">\W</td>
-<td style="text-align: left">匹配任意一个非数字、字母或下划线，即[^0-9a-zA-Z_]</td>
-</tr>
-<tr>
-<td style="text-align: center">\b</td>
-<td style="text-align: left">匹配单词的开始或结束</td>
-</tr>
-</tbody></table>
-
-<h3>原子的筛选方式</h3>
-
-<table><thead>
-<tr>
-<th style="text-align: center">筛选方式</th>
-<th style="text-align: left">描述</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: center">丨</td>
-<td style="text-align: left">匹配两个或者多个分支选择</td>
-</tr>
-<tr>
-<td style="text-align: center">[]</td>
-<td style="text-align: left">匹配方括号中的任意一个原子</td>
-</tr>
-<tr>
-<td style="text-align: center">[^]</td>
-<td style="text-align: left">匹配除方括号中的原子之外的任意字符</td>
-</tr>
-</tbody></table>
-
-<h3>示例练习</h3>
-
-<ul>
-<li><p>匹配&#39;Duang~&#39;和&#39;duang~&#39;</p>
-
-<p><code>/Duang~|duang~/</code> 或者 <code>/[Dd]uange~/</code></p></li>
-<li><p>匹配用尖括号括起来的以&#39;a&#39;开头的字符串，如&#39;<ab>&#39;,&#39;<a34>&#39;</p>
-
-<p><code>/&lt;a[^&gt;]+&gt;/</code> &#39;[^&gt;]&#39;为非&#39;&gt;&#39;的字符</p></li>
-</ul>
-
-<h2>量词</h2>
+<p>用于指定前面的项的重复次数。</p>
 
 <table><thead>
 <tr>
@@ -476,22 +479,43 @@
 </tr>
 </tbody></table>
 
-<h3>示例</h3>
+<p>简单的例子：</p>
 
 <ul>
-<li><p>匹配&#39;aaa&#39;</p>
-
-<p><code>/aaa/</code> 或者<code>/a{3}/</code></p></li>
-<li><p>匹配任意3个连续的英文字母</p>
-
-<p><code>/[a-zA-Z]{3}/</code></p></li>
-<li><p>匹配连续出现至少4次英文字母或数字或下划线的情况</p>
-
-<p><code>/[a-zA-Z0-9_]{4,}/</code> 或者 <code>/\w{4,}/</code></p></li>
-<li><p>匹配&#39;https或http&#39;</p>
-
-<p><code>/https|http/</code> 或者 <code>/https?/</code></p></li>
+<li><p>匹配&#39;aaa&#39;：<code>/aaa/</code> 或者<code>/a{3}/</code></p></li>
+<li><p>匹配任意3个连续的英文字母：<code>/[a-zA-Z]{3}/</code></p></li>
+<li><p>匹配连续出现至少4次英文字母或数字或下划线的情况：<code>/[a-zA-Z0-9_]{4,}/</code> 或者 <code>/\w{4,}/</code></p></li>
+<li><p>匹配&#39;https或http&#39;：<code>/https|http/</code> 或者 <code>/https?/</code></p></li>
 </ul>
+
+<p><code>{,6}</code>，这不是一个量词，只会被认为是普通字符，对其自身进行原文匹配。</p>
+
+<p><code>{0}</code>，它会导致行为是认为前面的项不存在。如<code>/h\d{0}/</code>，相当于<code>/h/</code></p>
+
+<p>量词默认情况下是进行贪婪匹配的:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="nv">$subject</span> <span class="o">=</span> <span class="s1">&#39;/*这是注释1*/这不是注释/*这是注释2*/&#39;</span><span class="p">;</span>
+    <span class="nv">$pattern</span> <span class="o">=</span> <span class="s1">&#39;/\/\*.*\*\//&#39;</span><span class="p">;</span> <span class="c1">// 用来匹配注释</span>
+    <span class="nb">preg_match_all</span><span class="p">(</span><span class="nv">$pattern</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$matches</span><span class="p">);</span>
+    <span class="nx">p</span><span class="p">(</span><span class="nv">$matches</span><span class="p">);</span> <span class="c1">// [[&#39;*这是注释1*/这不是注释/*这是注释2*/&#39;]]</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>在量词后面紧跟一个?标记，它可以使量词匹配变成懒惰模式。</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="nv">$pattern2</span> <span class="o">=</span> <span class="s1">&#39;/\/\*.*?\*\//&#39;</span><span class="p">;</span>
+    <span class="nb">preg_match_all</span><span class="p">(</span><span class="nv">$pattern2</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$matches</span><span class="p">);</span>
+    <span class="nx">p</span><span class="p">(</span><span class="nv">$matches</span><span class="p">);</span> <span class="c1">// [[&#39;/*这是注释1*/&#39;, &#39;/*这是注释2*/&#39;]]</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>?标记的懒惰特性只出现在懒惰模式可以成功匹配的情况下：</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="nv">$subject</span> <span class="o">=</span> <span class="s1">&#39;a33a&#39;</span><span class="p">;</span>
+    <span class="nv">$pattern</span> <span class="o">=</span> <span class="s1">&#39;/\w\d??\d\w/&#39;</span><span class="p">;</span> <span class="c1">// \d?? 更倾向于不匹配</span>
+    <span class="nb">preg_match_all</span><span class="p">(</span><span class="nv">$pattern</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$matches</span><span class="p">);</span> <span class="c1">// 但是\d??如果不匹配数字的话将导致匹配失败，这时懒惰特性会消失</span>
+    <span class="nx">p</span><span class="p">(</span><span class="nv">$matches</span><span class="p">);</span> <span class="c1">// [[&#39;a33a&#39;]]</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>如果设置了<code>PCRE_UNGREEDY</code>选项，那么量词默认情况下为非贪婪的。通过?标记可以使其贪婪。</p>
 
 <h2>边界控制</h2>
 
@@ -515,20 +539,43 @@
 </tr>
 </tbody></table>
 
-<h2>分组(子表达式)</h2>
+<h2 id="subpatterns">子组/子表达式(Subpatterns)</h2>
 
-<p>重复多个字符该怎么办呢？这时可以使用小括号来指定子表达式，这样你就可以指定这个子表达式重复的次数了。</p>
+<p>子组通过圆括号分隔界定，并且它们可以嵌套。将一个模式中的一部分标记为子组主要是来做两件事情：</p>
 
-<h3>使用示例</h3>
+<ol>
+<li><p>将可选分支局部化。如<code>/cat(arcat|erpillar|)/</code>，可以匹配&#39;cat&#39;、&#39;catarcat&#39;和&#39;caterpillar&#39;。</p></li>
+<li><p>将子组设定为捕获子组。当整个模式匹配后，目标字符串中匹配子组的部分将会通过<strong>pcre_exec()</strong>的<em>ovector</em>参数回传给调用者。左括号从左往右出现的次序就是对应子组的下标(从1开始)，可以通过这些下标数字来获取捕获子模式匹配结果。</p></li>
+</ol>
+
+<p>比如，使用模式<code>/((red|white) (king|queen))/</code>来匹配字符串&#39;the red king&#39;，模式匹配到得结果是[&#39;red king&#39;, &#39;red king&#39;, &#39;red&#39;, &#39;king&#39;]的形式，其中第0个元素是整个模式匹配的结果，后面的三个元素依次为三个子组匹配的结果。它们的下标分别为1，2，3。</p>
+
+<table><thead>
+<tr>
+<th style="text-align: center">子组语法</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><code>(pattern)</code></td>
+<td style="text-align: left">匹配pattern，并捕获文本到自动命名的组里</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>(?:pattern)</code></td>
+<td style="text-align: left">匹配pattern，但不捕获匹配的文本，也不给此分组分配组号</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>(?&lt;name&gt;pattern)</code>/<code>(?&#39;name&#39;pattern)</code></td>
+<td style="text-align: left">匹配pattern，并捕获文本到名称为name的组里</td>
+</tr>
+</tbody></table>
+
+<p>一些简单的示例：</p>
 
 <ul>
-<li><p>匹配&#39;Duang~&#39;或者&#39;duang~&#39;</p>
-
-<p><code>/(D|d)uang~/</code></p></li>
-<li><p>匹配任意1-3个数字后面加一个&#39;.&#39;3次</p>
-
-<p><code>/(\d{1,3}\.){3}/</code></p></li>
-<li><p>匹配正确的ipv4地址</p>
+<li><p>匹配&#39;Duang~&#39;或者&#39;duang~&#39;：<code>/(D|d)uang~/</code></p></li>
+<li><p>匹配任意1-3个数字后面加一个&#39;.&#39;3次：<code>/(\d{1,3}\.){3}/</code></p></li>
+<li><p>匹配正确的ipv4地址：</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">/((2[0-4]\d|25[0-5]|[01]?\d{1,2})\.){3}(2[0-4]\d|25[0-5]|[01]?\d{1,2})/
 
 // ============================================
@@ -538,6 +585,19 @@
 // [01]?\d{1,2} 能够匹配的数的范围是0-199，但是有几种格式0，00，01，010.前面带前导0在ip地址中是被允许的
 // 所以整个(2[0-4]\d|25[0-5]|[01]?\d{1,2})匹配的是0-255
 </code></pre></div></li>
+</ul>
+
+<p>事实上，圆括号履行的两种功能并不总是有用的。经常我们会有一种需求需要使用子组进行分组，但又不需要(单独的)捕获它们。在子组定义的左括号后面紧跟字符串&quot;?:&quot;会使得该子组不被单独捕获，并且不会对其后子组序号的计算产生影响。</p>
+
+<p>比如，使用模式<code>((?:red|white) (king|queen))</code>来匹配字符串&#39;the white queen&#39;，匹配到的结果会是[&#39;white queen&#39;, &#39;white queen&#39;, &#39;queen&#39;]，索引0的结果是整个表达式的匹配结果，后面两个是匹配的子组。捕获子组序号的最大值是99， 最大允许拥有的所有子组(包括捕获的和非捕获的)的数量为200。</p>
+
+<p>也可以自己指定子表达式的<strong>组名</strong>。指定子表达式组名的语法：<code>(?&lt;Word&gt;\w+)</code> 或者 <code>(?&#39;Word&#39;\w+)</code> - 指定<code>\w+</code>子表达式的组名为&#39;Word&#39;，反向引用这个捕获的内容使用<code>\k&lt;Word&gt;</code>，所以上一个例子可以写成：<code>\b(?&lt;Word&gt;\w+)\b\s+\k&lt;Word&gt;\b</code></p>
+
+<p>有时候，需要多个匹配可以在一个正则表示中选用子组。为了让多个子组可以共用一个后向引用数字的问题，(?| 语法可以允许复制数字。</p>
+
+<ul>
+<li><p>匹配&#39;Sunday&#39;：<code>/(?:(Sat)ur|(Sun))day/</code>。结果为[[&#39;Sunday&#39;], [], [&#39;Sun&#39;]]，&#39;Sat&#39;和&#39;Sun&#39;的匹配结果会分别在后向引用1和2中。</p></li>
+<li><p>使用<code>/(?|(Sat)ur|(Sun))day/</code>来匹配时，&#39;Sat&#39;或&#39;Sun&#39;的匹配结果都只在后向引用1中，使用这种方式匹配&#39;Sunday&#39;的结果为[[&#39;Sunday&#39;], [&#39;Sun&#39;]]</p></li>
 </ul>
 
 <h2>修正模式</h2>
@@ -628,28 +688,6 @@
 <p>使用小括号指定了一个子表达式后，匹配的这个子表达式的内容需要做一些其它进一步的处理，如重复搜索前面某子表达式匹配的内容。</p>
 
 <p>默认情况下，每个子表达式(分组)自动拥有一个组号，规则是：从左往右，以分组的左括号为标志，第一个出现的组号为1，第二个为2，一次类推。<code>\b(\w+)\b\s+\1\b</code>可以匹配重复的单词，如&#39;go go&#39;， &#39;everyone everyone&#39;。</p>
-
-<p>也可以自己指定子表达式的<strong>组名</strong>。指定子表达式组名的语法：<code>(?&lt;Word&gt;\w+)</code> 或者 <code>(?&#39;Word&#39;\w+)</code> - 指定<code>\w+</code>子表达式的组名为&#39;Word&#39;，反向引用这个捕获的内容使用<code>\k&lt;Word&gt;</code>，所以上一个例子可以写成：<code>\b(?&lt;Word&gt;\w+)\b\s+\k&lt;Word&gt;\b</code></p>
-
-<table><thead>
-<tr>
-<th style="text-align: center">捕获语法</th>
-<th style="text-align: left">说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: center"><code>(exp)</code></td>
-<td style="text-align: left">匹配exp，并捕获文本到自动命名的组里</td>
-</tr>
-<tr>
-<td style="text-align: center"><code>(?&lt;name&gt;exp)</code></td>
-<td style="text-align: left">匹配exp，并捕获文本到名称为name的组里，也可以写成(?&#39;name&#39;exp)</td>
-</tr>
-<tr>
-<td style="text-align: center"><code>(?:exp)</code></td>
-<td style="text-align: left">匹配exp，不捕获匹配的文本，也不给此分组分配组号</td>
-</tr>
-</tbody></table>
 
 <h2>断言</h2>
 
@@ -823,7 +861,7 @@
 
 <ol>
 <li><a href="http://deerchao.net/tutorials/regex/regex.htm">《正则表达式30分钟入门教程》</a> - <strong>deerchao</strong> <em>2013-01-10</em></li>
-<li><a href="http://imooc.com/learn.350">慕课网 - 《鬼斧神工之正则表达式》</a> - <strong>badguy</strong></li>
+<li><a href="http://imooc.com/learn/350">慕课网 - 《鬼斧神工之正则表达式》</a> - <strong>badguy</strong></li>
 <li><a href="http://php.net/manual/zh/book.pcre.php">《PHP中文文档》</a></li>
 </ol>
 
@@ -842,6 +880,8 @@
 
   <li class="previous"><a href="/2015/04/05/PHP%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.html">&larr; Older</a></li>
 
+
+  <li class="next"><a href="/2015/04/08/PHP%E7%AE%97%E6%B3%95%E9%A2%98.html">Newer &rarr;</a></li>
 
 </ul>
 
@@ -875,7 +915,7 @@
     <p class="text-muted credit">
       &copy; 2015 Jason's Klog &middot;
       <a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>
-      2015-04-08 17:51:43 +0800
+      2015-04-08 22:18:28 +0800
     </p>
   </footer>
 </div>
