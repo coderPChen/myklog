@@ -1,0 +1,91 @@
+#webView
+_______
+###网页  （网站= N个网页+服务器+数据库。。。）
+_____
+
+
+	 html : 具体内容，和结构 
+	 css : 排版（美化） 
+	 js : 用户交互 （动态效果）  ，鼠标事件作出（动态页面）
+
+
+* 现象： webView加载一网页时候， 会发出很多的请求： 这个就是通过网页代码来实现的：  （js）
+###### webView对比
+* 内容 ：  数据源代理
+* 排版： NSLayoutFlow
+* 响应： 代理方法
+						
+
+
+##html
+_______
+######html组成
+<pre>
+ * 什么都是标签,  标签内有各种 属性
+ * html 文件 是由N个标签组成的：，标签之间是有层次结构的 
+ * html标签---》分为head标签  和  body标签 两个子标签</pre>
+	<div class="title"> alskdjlf </div> 
+    onclick ----> 当点击的时候
+    onload -----》 当加载的时候
+ * html 可以嵌入 css代码： style="   "   
+         可以嵌入 js 代码  onclick="  "
+######标签
+<pre>
+* 块级标签
+* 行内标签 
+* 行内-块级标签</pre>
+    
+
+##css
+______
+######问题
+* html 有那么多的标签， 如果 每一个， 都去设置那累死：
+
+#####解决办法
+<pre>
+*   1 html 标签的 层次结构（分组的）
+*   可以设置， 单个， 组 </pre>
+
+##javaScript
+______
+<pre>* 浏览器的脚本语言， 能控制浏览器行为   
+* 动态添加，删掉 html 标签
+* 动态功能， 动画
+* 事件处理
+* 发送一个请求</pre>     
+	
+	this.onclick = function(){ window.location.href = 
+
+####语法
+* 全局对象： 系统内置的一些对象，能用在任何范围中
+* window 浏览器的窗口可以重定向
+<pre>* onclick = window.location.href = ""   点击会重定向到 指定的 URL中去
+* </pre>
+* document 可以动态添加，删掉 html 标签
+<pre> * 删掉  document.getElementByClass().remove 得到对应的标签对象在 remove。 就删掉了</pre>
+##操作
+_______
+<pre>
+* 拦截webView的请求地址：  在代理中的 - webView ,,should...
+* 加载 请求 load。。。
+* 执行js代码  -stringByEvaluatingJavaScript       </pre>     
+
+
+###缓存
+-----
+
+* NSURLCache：  是保存 webView中 缓存： （单例）
+* -cachedResponseForRequest：，，    （从 缓存中 拿数据 是 根据  request 来 拿的）， request 对象为 key：
+
+
+###webView 和 OC 之间的交互
+-----
+* webView中点击 html的图片，调用照片查看器
+
+
+
+##案例
+______
+###实现新闻的图文混排
+______
+* 一种就是网站做好对应手机的页面， 直接加载
