@@ -69,11 +69,12 @@
   </p> <hr/>
   <div class="post">
     <ol>
-<li><a href="#binarySearch">二分查找法</a> </li>
-<li><a href="#joseph">约瑟夫环</a></li>
+<li><a href="#binarySearch">二分查找法(Binary Search)</a></li>
+<li><a href="#joseph">约瑟夫环(Joseph Problem)</a></li>
+<li><a href="#fibonacciSequence">斐波那契数列(Fibonacci Sequence)</a></li>
 </ol>
 
-<h2 id="binarySearch">I. 二分查找法</h2>
+<h2 id="binarySearch">I. 二分查找法(Binary Search)</h2>
 
 <p>也称折半搜索，二分搜索。</p>
 
@@ -145,7 +146,7 @@
     <span class="p">}</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<h2 id="joseph">II. 约瑟夫环</h2>
+<h2 id="joseph">II. 约瑟夫环(Joseph Problem)</h2>
 
 <p>操场上有n个学生排成一圈，他们给自己从1到n编号来玩报数游戏。从编号为k的同学开始，依次从1到m报数，报到m的学生出列，下一位同学从1开始再次报数，直到再有同学报到m，再次出列...如此不停的进行下去，直到还剩一位同学。要求编程模拟此过程，输入n，m，k，输出最后那个同学的编号。</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
@@ -214,6 +215,48 @@
     <span class="p">}</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
+<h2 id="fibonacciSequence">III. 斐波那契数列(Fibonacii Sequence)</h2>
+
+<p>斐波那契数列，又称黄金分割数列，指的是这样一个数列：0、1、1、2、3、5、8、13、21、...</p>
+
+<p>在数学上，斐波那契数列被以递归的方法定义：F(0)=0，F(1)=1，F(n)=F(n-1)+F(n-2)(n&gt;=2)。</p>
+
+<p>需要特别指出的是，斐波那契数列的第1项是0，第2项是1，从第3项开始，每一项都是前两项之和。</p>
+
+<h3>上台阶问题</h3>
+
+<p>有一个n级的台阶，现在有一个人要登到这个台阶的顶上，他一次可能跨台阶最大级数为m级(m&gt;1)。问这人登顶这个台阶有多少种方法。编程解决这个问题，输入n和m，输出登顶台阶的方法种数。</p>
+
+<p><strong>具象化理解这个问题</strong></p>
+
+<p>如果这个台阶有50级，有一个老人和一个年轻人都要登到这个台阶的顶上，老人每次跨出1级或2级台阶，年轻人一次可跨出1级、2级或3级台阶。那么老人与年轻人各自登上顶部的方法有多少种？</p>
+
+<p><strong>分析</strong></p>
+
+<p>先看一看老人和年轻人在达到50级台阶之前的一步是停在哪一级台阶上的？老人可能是停在49级或48级；年轻人停留的级数可能为49，48或47。计算老人达到50级台阶的方法数可以转化成计算老人到达49级的方法数与到达48级的方法数之和(F(50)=F(49)+F(48))；而计算这个年轻人到达顶部50级的方法数也可转化为分别计算他到达49，48，47级的方法数之和(F(50)=F(49)+F(48)+F(47))。</p>
+
+<p><strong>解决问题</strong></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="k">function</span> <span class="nf">steps</span><span class="p">(</span><span class="nv">$n</span><span class="p">,</span> <span class="nv">$m</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$m</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 如果每次最多跨出1级，那只有1种方法</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 如果台阶数为1，那也只有1种登顶的方法</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// 如果台阶数为2，那么只有2种可能, 1-1 或 2</span>
+        <span class="p">}</span>
+
+        <span class="nv">$result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="nv">$m</span><span class="p">;</span> <span class="o">++</span><span class="nv">$i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 假设一个人最多可以跨4级台阶时，他在第3级台阶的方法数只能是由第2级方法数与第1级的方法数之和</span>
+            <span class="c1">// 而不能还有0级与-1级</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$n</span> <span class="o">-</span> <span class="nv">$i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+            <span class="nv">$result</span> <span class="o">+=</span> <span class="nx">steps</span><span class="p">(</span><span class="nv">$n</span> <span class="o">-</span> <span class="nv">$i</span><span class="p">,</span> <span class="nv">$m</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
   </div>
 </div>
 <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
@@ -256,7 +299,7 @@
     <p class="text-muted credit">
       &copy; 2015 Jason's Klog &middot;
       <a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>
-      2015-04-08 22:18:28 +0800
+      2015-04-09 11:19:49 +0800
     </p>
   </footer>
 </div>
